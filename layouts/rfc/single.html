@@ -1,0 +1,83 @@
+{{ partial "header" . }}
+
+<section class="mainscreen">
+<div id="dokuwiki__site">
+    <div class="wrapper group">
+        {{ if (.Site.Params.GithubRepository) }}
+        <div id="dokuwiki__pagetools">
+            <h3 class="a11y">Page Tools</h3>
+            <div class="tools">
+                <ul>
+                    <li>
+                        <a href="https://github.com/{{ .Site.Params.GithubRepository }}/blob/master/content/{{ .File.Path }}" class="action edit" accesskey="e" rel="nofollow" title="Edit this page [E]">
+                            <span>Page source</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/{{ .Site.Params.GithubRepository }}/edit/master/content/{{ .File.Path }}" class="action edit" accesskey="e" rel="nofollow" title="Edit this page [E]">
+                            <span>Edit this page</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/{{ .Site.Params.GithubRepository }}/commits/master/content/{{ .File.Path }}" class="action revs" accesskey="o" rel="nofollow" title="Old revisions [O]">
+                            <span>Old revisions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#top" class="action top" accesskey="t" rel="nofollow" title="Back to top [T]">
+                            <span>Back to top</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {{ end }}
+
+        {{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") | $.Scratch.Set "date" }}
+        {{ with .Description }} {{ $.Scratch.Set "subtitle" . }} {{ end }}
+
+        <h1>{{ .Title }}</h1>
+
+        <ul>
+            <li>Tags:
+                {{ range .Params.tags }}
+                <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">{{ . }}</a>
+                {{ end }}
+            </li>
+            <li>Author: {{ .Params.Author }}</li>
+            <li>Status: {{ .Params.Status }}</li>
+            <li>Date: {{ $.Scratch.Get "date" }}</li>
+            <li>Proposed version: {{ .Params.ProposedVersion }}</li>
+            {{ range .Params.links }}
+                <li>{{ .title }}: <a href="{{ .link }}">{{ .link }}</a></li>
+            {{ end }}
+        </ul>
+
+
+        <br> <div class="text-justify">{{ .Content }}</div>
+
+        <!-- related posts with the same tags -->
+        {{ $related := first 3 (where (where (where .Site.Pages.ByDate.Reverse ".Type" "==" "post") ".Params.tags" "intersect" .Params.tags) "Permalink" "!=" .Permalink) }}
+
+        {{ if $related }}
+
+            <h4 class="page-header">Related</h4>
+
+            {{ range $related }} {{ partial "list-item" . }} {{ end }}
+
+        {{ end }}
+
+        {{ if and .Site.DisqusShortname (not .Params.disableComments) }}
+
+            <h4 class="page-header">Comments</h4>
+
+            {{ template "_internal/disqus.html" . }}
+
+        {{ end }}
+    </div>
+</div>
+</section>
+<section class="secondscreen">
+    {{ .TableOfContents }}
+</section>
+{{ partial "footer.html" . }}

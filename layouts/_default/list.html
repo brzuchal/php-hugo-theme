@@ -1,0 +1,15 @@
+{{ partial "header" . }}
+
+<section class="mainscreen">
+
+    <h2>{{ .Title }}</h2>
+
+    {{ .Content }}
+
+    {{ range (.Paginator 5).Pages }} {{ partial "list-item" . }} {{ end }}
+
+</section>
+
+{{ partial "paginator" . }}
+
+{{ partial "footer" . }}

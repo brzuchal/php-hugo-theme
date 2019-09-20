@@ -1,0 +1,17 @@
+{{ partial "header" . }}
+
+<section class="mainscreen">
+
+    <h2>{{ .Title }}</h2>
+
+    {{ .Content }}
+
+    <ul>
+        {{ range (.Paginator 5).Pages }} {{ partial "rfc/list-item" . }} {{ end }}
+    </ul>
+
+</section>
+
+{{ partial "paginator" . }}
+
+{{ partial "footer" . }}

@@ -1,0 +1,12 @@
+name = "PHP"
+license = "MIT"
+licenselink = "https://github.com/brzuchal/php-hugo-theme/blob/master/LICENSE.md"
+description = "PHP Layout powered by Hugo"
+homepage = "http://github.com/brzuchal/php-hugo-theme/"
+tags = ["php", "responsive"]
+features = ["responsive"]
+min_version = "0.24.1"
+
+[author]
+  name = "Michał Brzuchalski <brzuchal@php.net>"
+  homepage = "https://brzuchal.com/"

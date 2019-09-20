@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+    <head>
+        {{ partial "head-open" . }}
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ .Title }}</title>
+        <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,400italic,600italic|Source+Code+Pro&amp;subset=latin,latin-ext" rel="stylesheet">
+        <link rel="shortcut icon" href="//php.net/favicon.ico">
+        <!--[if lt IE 9]>
+        <script src="//shared.php.net/js/html5shiv.js"></script>
+        <![endif]-->
+        {{ if .Site.Params.favicon }}
+        <link rel="icon" href="{{ .Site.Params.favicon | absURL }}">
+        {{ end }}
+        {{ partial "css" . }} {{ partial "js" . }} {{ hugo.Generator }}
+        {{ with .OutputFormats.Get "RSS" }}
+        <link href="{{ .RelPermalink }}" rel="alternate" type="{{ .MediaType.Type }}" title="{{ $.Site.Title }}" />
+        <link href="{{ .RelPermalink }}" rel="feed" type="{{ .MediaType.Type }}" title="{{ $.Site.Title }}" />
+        {{ end }}
+        <link rel="manifest" href="{{ "manifest.json" | absURL }}" />
+
+        {{ if .Site.GoogleAnalytics }}
+        <!-- Global Site Tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ .Site.GoogleAnalytics }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)};
+          gtag('js', new Date());
+          gtag('config', '{{ .Site.GoogleAnalytics }}');
+        </script>
+        {{ end }}
+    </head>
+    <body>
+        {{ partial "body-open" . }}
+        <a id="top"></a>
+        <div class="wrap">
+            <header class='clearfix'>
+                <div id="mainmenu-toggle-overlay"></div>
+                <input type="checkbox" id="mainmenu-toggle">
+                <nav class="fullscreen">
+                    <div class="mainscreen">
+                        <a href="/" class="home"><img src="//php.net/images/logo.php" width="48" height="24" alt="php"><span class="subdomain">{{ .Site.Title }}</span></a>
+                        {{ if .Site.Menus.main }}
+                        <ul>
+                            {{ range sort .Site.Menus.main }}
+                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            {{ end }}
+                        </ul>
+                        {{ end }}
+                    </div>
+                    <div class="secondscreen">
+                        {{ if .Site.Menus.icon }}
+                        <ul >
+                            {{ range sort .Site.Menus.icon }}
+                            <li><a href="{{ .URL }}"><i class="fa fa-{{ .Name }}"></i></a></li>
+                            {{ end }}
+                        </ul>
+                        {{ end }}
+                    </div>
+                </nav>
+            </header>
+            <div id="flash-message"></div>
+            <nav id="megadropdown"></nav>
+
+            <section class="fullscreen clearfix">

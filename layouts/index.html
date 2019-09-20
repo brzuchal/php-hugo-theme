@@ -1,0 +1,18 @@
+{{ partial "header" . }}
+
+<section class="mainscreen">
+
+    <div>
+
+        <h1>{{ .Site.Title }}</h1>
+
+        {{ with .Content }}
+        <div class="homepage-content">
+            {{ . }}
+        </div>
+        {{ end }}
+    </div>
+
+</section>
+
+{{ partial "footer" . }}

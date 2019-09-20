@@ -1,0 +1,13 @@
+    {{ .Date.Format (.Site.Params.dateFormat | default "2006-01-02") | $.Scratch.Set "date" }}
+    {{ with .Description }} {{ $.Scratch.Set "subtitle" . }} {{ end }}
+
+    <li>
+        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+
+        Author: {{ .Params.Author }} <br>
+        (Date: {{ $.Scratch.Get "date" }}, Proposed version: {{ .Params.ProposedVersion }})</li>
+
+        {{ range .Params.tags }}
+        <a href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}">{{ . }}</a>
+        {{ end }}
+    </li>
