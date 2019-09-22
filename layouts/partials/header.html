@@ -40,7 +40,7 @@
                 <input type="checkbox" id="mainmenu-toggle">
                 <nav class="fullscreen">
                     <div class="mainscreen">
-                        <a href="/" class="home"><img src="//php.net/images/logo.php" width="48" height="24" alt="php"><span class="subdomain">{{ .Site.Title }}</span></a>
+                        <a href="{{ .Site.BaseURL }}" class="home"><img src="//php.net/images/logo.php" width="48" height="24" alt="php"><span class="subdomain">{{ .Site.Title }}</span></a>
                         {{ if .Site.Menus.main }}
                         <ul>
                             {{ range sort .Site.Menus.main }}
