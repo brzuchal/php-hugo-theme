@@ -44,7 +44,7 @@
                         {{ if .Site.Menus.main }}
                         <ul>
                             {{ range sort .Site.Menus.main }}
-                            <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+                            <li><a href="{{ .URL }}">{{ .Pre }} {{ .Name }} {{ .Post }}</a></li>
                             {{ end }}
                         </ul>
                         {{ end }}
